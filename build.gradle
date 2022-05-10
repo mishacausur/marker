@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        compose_version = '1.1.0-beta01'
+        compose_version = '1.1.0'
     }
     repositories {
         google()
@@ -19,4 +19,27 @@ plugins {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+allprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            freeCompilerArgs += [
+                    "-Xuse-experimental=kotlin.ExperimentalUnsignedTypes",
+                    "-Xuse-experimental=kotlinx.coroutines.DelicateCoroutinesApi",
+                    "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                    "-Xuse-experimental=kotlinx.coroutines.FlowPreview",
+                    "-Xuse-experimental=kotlinx.coroutines.InternalCoroutinesApi",
+                    "-Xuse-experimental=kotlinx.serialization.ExperimentalSerializationApi",
+                    "-Xuse-experimental=androidx.compose.animation.ExperimentalAnimationApi",
+                    "-Xuse-experimental=androidx.compose.ExperimentalComposeApi",
+                    "-Xuse-experimental=androidx.compose.material.ExperimentalMaterialApi",
+                    "-Xuse-experimental=androidx.compose.runtime.ExperimentalComposeApi",
+                    "-Xuse-experimental=androidx.compose.ui.ExperimentalComposeUiApi",
+                    "-Xuse-experimental=coil.annotation.ExperimentalCoilApi",
+                    "-Xuse-experimental=com.google.accompanist.pager.ExperimentalPagerApi",
+
+            ]
+        }
+    }
 }
